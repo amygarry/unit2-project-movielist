@@ -1,7 +1,8 @@
 import MovieCard from "./MovieCard"
 
-function Watchlist (props){
-    let movieDisplay=props.list.map((movie)=>(<MovieCard movie={movie}/>))
+function Watchlist ({list}){
+ 
+    let movieDisplay=list.map((movie)=>(<MovieCard movie={movie}/>))
     return(
         <div className="watchlist">
             <h1>My Watchlist</h1>
@@ -10,4 +11,4 @@ function Watchlist (props){
     )
 }
 
-export default Watchlist
+export default Watchlist``

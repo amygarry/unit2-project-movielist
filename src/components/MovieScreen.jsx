@@ -1,10 +1,10 @@
+
+
 import MovieCard from "./MovieCard"
 
-function MovieScreen (props){
+function MovieScreen ({addMovie, movieList}){
 
-    const addMovie = props.addMovie
-
-    let movieDisplay = props.movieList.map((movie)=>(<MovieCard movie={movie} addMovie={addMovie}/>))
+    let movieDisplay = movieList.map((movie)=>(<MovieCard movie={movie} addMovie={addMovie}/>))
 
     return (
         <div className="page">

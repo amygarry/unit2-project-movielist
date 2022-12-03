@@ -1,7 +1,6 @@
 
-function MovieCard (props){
-    const addMovie = props.addMovie
-    const movie=props.movie
+function MovieCard ({addMovie, movie}){
+   
     return (
         <div className="movie-card">
             <div>
@@ -14,3 +13,5 @@ function MovieCard (props){
 }
 
 export default MovieCard 
+
+
