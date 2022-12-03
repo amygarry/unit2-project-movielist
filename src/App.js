@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import axios from 'axios'
 import './App.css';
 import Header from './components/Header';
@@ -12,21 +12,27 @@ function App() {
   const [list, setList]= useState([])
   const [page, setPage]=useState(1)
 
-  const getData = () =>{
-    axios.get(`//api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${page}`)
-    .then((res)=>{
-      // console.log(res.data)
+  const getData = useCallback(() => {
+    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${page}`)
+    .then((res) => {
+      console.log(res.data.results)
       setMovieList(res.data.results)
     })
-  }
-
-  useEffect(() => {
-    getData();
   }, [page])
 
-  const addMovie =(movie)=>{
-    setList([...list, movie])
+  useEffect(() => {getData()}, [getData])
+
+  function addMovie(movie) {
+    setList(list => {
+      return [...list, movie]})
   }
+
+  const removeMovie = (movie) => {
+    const newState = list.filter((mov) => {
+        return mov !== movie;
+    });
+    setList(newState);
+  } 
 
   return (
     <div className="App">
@@ -38,9 +44,11 @@ function App() {
         setPage={setPage}
         movieList={movieList}
         addMovie={addMovie}
+        removeMovie={removeMovie}
         />
         <Watchlist
-        list={list}/>
+        list={list}
+        removeMovie={removeMovie}/>
       </main>
     </div>
   );

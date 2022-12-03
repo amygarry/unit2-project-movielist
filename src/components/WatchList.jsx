@@ -1,8 +1,15 @@
+import React from "react"
 import MovieCard from "./MovieCard"
 
-function Watchlist ({list}){
+function Watchlist ({list, removeMovie}){
  
-    let movieDisplay=list.map((movie)=>(<MovieCard movie={movie}/>))
+    let movieDisplay = list.map((movie) => {
+        return <MovieCard 
+            key={movie.id}
+            movie={movie} 
+            list={list}
+            removeMovie={removeMovie}/>})
+    
     return(
         <div className="watchlist">
             <h1>My Watchlist</h1>
@@ -11,4 +18,4 @@ function Watchlist ({list}){
     )
 }
 
-export default Watchlist``
+export default Watchlist
